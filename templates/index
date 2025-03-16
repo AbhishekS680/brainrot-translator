@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brainrot Generator</title>
+    <style>
+        body {
+            background-color: paleturquoise;
+        }
+        h1 {
+            color: navy;
+            margin-bottom: 20px;
+        }
+        input{
+            padding: 10px;
+        }
+        button{
+            background-color: peachpuff;
+            font-size: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 12px;
+        
+        }
+        button:hover{
+            background-color: palevioletred;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Brainrot Generator</h1>
+    <form id="brainrot-form">
+        <input type="text" id="prompt-input" placeholder="Enter text to brainrot-ify">
+        <button type="submit">Generate</button>
+    </form>
+    <div id="brainrot-output"></div>
+    <script>
+        document.getElementById('brainrot-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const prompt = document.getElementById('prompt-input').value;
+            fetch(`/brainrot?prompt=${encodeURIComponent(prompt)}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('brainrot-output').innerText = data.brainrot;
+                });
+        });
+    </script>
+</body>
+</html>
